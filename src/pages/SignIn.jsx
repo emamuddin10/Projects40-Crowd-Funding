@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
   const {loginUser}=useContext(AuthContext)
@@ -36,7 +37,10 @@ const SignIn = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
-            <input type="submit" value="Login" />
+            <input className="btn bg-green-300" type="submit" value="Login" />
+            <p>If You have no account please  <Link to="/signUp" className=" font-bold text-green-400">Register</Link></p>
+            <button  className="  w-1/2 btn btn-neutral"><FcGoogle />Login With Google</button>
+
           </fieldset>
         </form>
       </div>

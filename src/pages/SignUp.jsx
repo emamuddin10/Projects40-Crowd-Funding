@@ -2,11 +2,25 @@ import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import auth from "../firebase/firebase.init";
+
 
 const SignUp = () => {
+  const googleProvider = new GoogleAuthProvider()
   const navigate = useNavigate()
   const userInfo = useContext(AuthContext)
   const {createUser,updateUserProfile}= userInfo
+
+  const handleGoogleLogin = ()=>{
+    signInWithPopup(auth,googleProvider)
+    .then(result=>{
+      alert('google login succesfully')
+      console.log(result)
+
+    })
+  }
 
   const handleCreateUser = (event)=>{
       event.preventDefault()
@@ -44,14 +58,15 @@ const SignUp = () => {
         <div className="card-body">
           <form onSubmit={handleCreateUser} className="fieldset">
             <label className="fieldset-label">Name</label>
-            <input type="text" name="name" className="input" placeholder="Enter Your Name" />
+            <input type="text" name="name" className="input w-full" placeholder="Enter Your Name" />
             <label className="fieldset-label">Photo</label>
-            <input type="text" name="photo" className="input" placeholder="Enter Your Photo Url" />
+            <input type="text" name="photo" className="input w-full" placeholder="Enter Your Photo Url" />
             <label className="fieldset-label">Email</label>
-            <input type="email" name="email"  className="input" placeholder="Email" />
+            <input type="email" name="email"  className="input w-full" placeholder="Email" />
             <label className="fieldset-label">Password</label>
-            <input type="password" name="password" className="input" placeholder="Password" />
-            <input type="submit" value="Sign Up" />
+            <input type="password" name="password" className="input w-full" placeholder="Password" />
+            <input className="btn  bg-green-300" type="submit" value="Sign Up" />
+            <p>If you have already account please  <Link to="/signIn" className=" font-bold text-green-400">Login</Link></p>
           </form>
         </div>
       </div>
