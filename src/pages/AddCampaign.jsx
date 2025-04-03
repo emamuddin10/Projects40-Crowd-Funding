@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AddCampaign = () => {
+  const {user}=useContext(AuthContext)
+  console.log(user)
   const [formData, setFormData] = useState({
     name: "Winter Clothes Drive",
     description: "Donate warm clothes to those in need",
@@ -79,6 +82,35 @@ const AddCampaign = () => {
                 name="photo"
                 value={formData.photo}
                 onChange={handleChange}
+                className="input w-full"
+                placeholder="Enter Photo Url"
+              />
+            </div>
+            <div>
+              <label className="fieldset-label">Deadline</label>
+              <input
+                type="date"
+                name="date"
+                className="input w-full"
+              />
+            </div>
+            <div>
+              <label className="fieldset-label">User Name</label>
+              <input
+                type="text"
+                name="photo"
+                value={formData.photo}
+                onChange={handleChange}
+                className="input w-full"
+                placeholder="Enter Photo Url"
+              />
+            </div>
+            <div>
+              <label className="fieldset-label">User Email</label>
+              <input
+                type="email"
+                name="email"
+                defaultValue={user.email}
                 className="input w-full"
                 placeholder="Enter Photo Url"
               />
