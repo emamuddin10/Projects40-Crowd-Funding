@@ -3,24 +3,16 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import auth from "../firebase/firebase.init";
+
+
 
 
 const SignUp = () => {
-  const googleProvider = new GoogleAuthProvider()
+  
   const navigate = useNavigate()
   const userInfo = useContext(AuthContext)
   const {createUser,updateUserProfile}= userInfo
 
-  const handleGoogleLogin = ()=>{
-    signInWithPopup(auth,googleProvider)
-    .then(result=>{
-      alert('google login succesfully')
-      console.log(result)
-
-    })
-  }
 
   const handleCreateUser = (event)=>{
       event.preventDefault()
