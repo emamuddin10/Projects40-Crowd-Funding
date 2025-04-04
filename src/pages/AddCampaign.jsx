@@ -4,20 +4,25 @@ import { AuthContext } from "../provider/AuthProvider";
 const AddCampaign = () => {
   const {user}=useContext(AuthContext)
   console.log(user)
+ 
   const [formData, setFormData] = useState({
     name: "Winter Clothes Drive",
     description: "Donate warm clothes to those in need",
     type: "Personal Issue",
     photo: "https://example.com/photo.jpg",
+    userName:user?.displayName,
+    email:user.email,
+    date:'01.01.2005'
   });
+  
 
   const handleChange = (event) => {
+    console.log(event.target.name)
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleAddCampaign = (event) => {
     event.preventDefault();
-    console.log(formData);
     fetch("http://localhost:5000/addCampaign", {
       method: "POST",
       headers: {
@@ -30,6 +35,7 @@ const AddCampaign = () => {
         console.log(data);
       });
   };
+  console.log(formData)
 
   return (
     <div className="w-10/12 mx-auto">
@@ -91,6 +97,8 @@ const AddCampaign = () => {
               <input
                 type="date"
                 name="date"
+                value={formData.date}
+                onChange={handleChange}
                 className="input w-full"
               />
             </div>
@@ -98,9 +106,10 @@ const AddCampaign = () => {
               <label className="fieldset-label">User Name</label>
               <input
                 type="text"
-                name="photo"
-                value={formData.photo}
+                name="userName"
+                value={formData.userName}
                 onChange={handleChange}
+                readOnly
                 className="input w-full"
                 placeholder="Enter Photo Url"
               />
@@ -110,7 +119,9 @@ const AddCampaign = () => {
               <input
                 type="email"
                 name="email"
-                defaultValue={user.email}
+                value={formData.email}
+                onChange={handleChange}
+                readOnly
                 className="input w-full"
                 placeholder="Enter Photo Url"
               />
