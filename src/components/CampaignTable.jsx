@@ -1,6 +1,8 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-const CampaignTable = () => {
+const CampaignTable = ({ campaign }) => {
+  const { _id, name, type, photo } = campaign;
+
   return (
     <tr>
       <th>
@@ -13,19 +15,22 @@ const CampaignTable = () => {
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">
               <img
-                src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                src={
+                  campaign.photo
+                    ? photo
+                    : "https://img.daisyui.com/images/profile/demo/2@94.webp"
+                }
                 alt="Avatar Tailwind CSS Component"
               />
             </div>
           </div>
           <div>
-            <div className="font-bold">Hart Hagerty</div>
-            <div className="text-sm opacity-50">United States</div>
+            <div className="font-bold">{name}</div>
           </div>
         </div>
       </td>
       <td>
-        Zemlak, Daniel and Leannon
+        {type}
         <br />
         <span className="badge badge-ghost badge-sm">
           Desktop Support Technician
@@ -33,7 +38,9 @@ const CampaignTable = () => {
       </td>
       <td>Purple</td>
       <th>
-        <button className="btn btn-ghost btn-xs">details</button>
+        <Link to={`/campaign-details/${_id}`}>
+          <button className="btn btn-success btn-xs">Campaign Details</button>
+        </Link>
       </th>
     </tr>
   );
