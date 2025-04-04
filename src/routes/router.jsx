@@ -8,12 +8,14 @@ import MyDonation from "../pages/MyDonation";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import CampaignDetails from "../components/CampaignDetails";
+import ErrorPage from "../pages/ErrorPage";
 
 
 const router = createBrowserRouter([
     {
         path:'/',
         element:<HomeLayout></HomeLayout>,
+        errorElement: <ErrorPage />,
         children:[
             {
                 path:'/',
