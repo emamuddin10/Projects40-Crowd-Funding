@@ -1,12 +1,8 @@
-# React + Vite
+This is my Crowd Funding website. Created this website using Tailwind CSS and React.js. Here is Some features of my website below: 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. This website is fully  secure all  route.
+2. User authentication system for donors and campaign creators
+3. Create and manage fundraising campaigns with images and descriptions
+4. Search and filter campaigns by category, goal, or location
+5. Fully responsive design for mobile, tablet, and desktop devices
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
