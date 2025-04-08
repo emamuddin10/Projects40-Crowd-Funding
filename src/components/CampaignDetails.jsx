@@ -2,13 +2,16 @@ import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const CampaignDetails = () => {
   const detailsCampaign = useLoaderData();
   const {user}= useContext(AuthContext)
 
   // console.log(detailsCampaign);
-  const { name, description, type, photo } = detailsCampaign;
+  const { name, description, type, photo} = detailsCampaign;
+  const deadline = new Date(detailsCampaign?.date)
+  const today = new Date()
 
   const handleDonation = ()=>{
     const donateCampaign = {
@@ -21,7 +24,12 @@ const CampaignDetails = () => {
        owenerEmail: detailsCampaign?.email,
        owenerName: detailsCampaign?.userName,
        userName:user?.displayName, userEmail: user?.email }
-      //  console.log(donateCampaign)
+       console.log(deadline)
+
+    if(deadline < today ){
+      console.log(deadline,today)
+      return toast.error("Sorry! The deadline for this campaign is over.")
+    }
     
     fetch('http://localhost:5000/add-donation',{
       method:'POST',

@@ -62,7 +62,7 @@ const Banner = () => {
       {/* Slide 3 */}
       <div id="slide3" className="carousel-item relative w-full">
         <img
-          src="https://images.unsplash.com/photo-1601231522153-4910f56cb71e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://media.istockphoto.com/id/1498170916/photo/a-couple-is-taking-a-bag-of-food-at-the-food-and-clothes-bank.webp?a=1&b=1&s=612x612&w=0&k=20&c=WIKBpmpSbwZBW5EEk6ZbXPaji47EUrfhmS5uBxBu9jA="
           className="w-full object-cover"
           alt="Together We Build"
         />
