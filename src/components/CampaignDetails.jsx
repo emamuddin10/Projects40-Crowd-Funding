@@ -31,7 +31,7 @@ const CampaignDetails = () => {
       return toast.error("Sorry! The deadline for this campaign is over.")
     }
     
-    fetch('http://localhost:5000/add-donation',{
+    fetch('https://projects40-croud-funding-server.vercel.app/add-donation',{
       method:'POST',
       headers:{
         'content-type': 'application/json'

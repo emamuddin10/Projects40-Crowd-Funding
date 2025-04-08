@@ -27,7 +27,7 @@ const UpdateCampaign = () => {
   const handleAddCampaign = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch(`http://localhost:5000/update/${loadedData._id}`, {
+    fetch(`https://projects40-croud-funding-server.vercel.app/update/${loadedData._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

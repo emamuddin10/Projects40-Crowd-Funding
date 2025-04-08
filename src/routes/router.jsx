@@ -26,7 +26,7 @@ const router = createBrowserRouter([
 
             {
                 path:'/addCampaign',
-                element:<AddCampaign></AddCampaign>,
+                element:<PrivetRoute><AddCampaign></AddCampaign></PrivetRoute>
                 
             },
             {
@@ -36,21 +36,21 @@ const router = createBrowserRouter([
           
             {
                 path:'/myCampaign',
-                element:<MyCampaign></MyCampaign>
+                element:<PrivetRoute><MyCampaign></MyCampaign></PrivetRoute>
             },
             {
                 path:'/myDonations',
-                element:<MyDonation></MyDonation>
+                element:<PrivetRoute><MyDonation></MyDonation></PrivetRoute>
             },
             {
                 path:'/campaign-details/:id',
                 element:<PrivetRoute><CampaignDetails></CampaignDetails></PrivetRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/details-campaign/${params.id}`)
+                loader:({params})=>fetch(`https://projects40-croud-funding-server.vercel.app/details-campaign/${params.id}`)
             },
             {
                  path:'/update/:id',
-                 element:<UpdateCampaign></UpdateCampaign>,
-                 loader:({params})=>fetch(`http://localhost:5000/details-campaign/${params.id}`)
+                 element:<PrivetRoute><UpdateCampaign></UpdateCampaign></PrivetRoute>,
+                 loader:({params})=>fetch(`https://projects40-croud-funding-server.vercel.app/details-campaign/${params.id}`)
             }
         ]
     },

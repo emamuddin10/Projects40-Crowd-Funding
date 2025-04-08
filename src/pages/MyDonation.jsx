@@ -9,7 +9,7 @@ const MyDonation = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myDonation/${user?.email}`)
+    fetch(`https://projects40-croud-funding-server.vercel.app/myDonation/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
 
