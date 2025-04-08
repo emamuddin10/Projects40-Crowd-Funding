@@ -7,7 +7,7 @@ const CampaignDetails = () => {
   const detailsCampaign = useLoaderData();
   const {user}= useContext(AuthContext)
 
-  console.log(detailsCampaign);
+  // console.log(detailsCampaign);
   const { name, description, type, photo } = detailsCampaign;
 
   const handleDonation = ()=>{
@@ -18,27 +18,29 @@ const CampaignDetails = () => {
        description: detailsCampaign.description,
        date: detailsCampaign?.date,
        amount: detailsCampaign?.amount,
+       owenerEmail: detailsCampaign?.email,
+       owenerName: detailsCampaign?.userName,
        userName:user?.displayName, userEmail: user?.email }
-       console.log(donateCampaign)
+      //  console.log(donateCampaign)
     
-    // fetch('http://localhost:5000/add-donation',{
-    //   method:'POST',
-    //   headers:{
-    //     'content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(donateCampaign)
-    // })
-    // .then(res=>res.json())
-    // .then(data => {
-    //   // console.log(data)
-    //   if(data.insertedId){
-    //     Swal.fire({
-    //                 title: "Success!",
-    //                 text: "Thank you for your donation",
-    //                 icon: "success"
-    //               });
-    //   }
-    // })
+    fetch('http://localhost:5000/add-donation',{
+      method:'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(donateCampaign)
+    })
+    .then(res=>res.json())
+    .then(data => {
+      // console.log(data)
+      if(data.insertedId){
+        Swal.fire({
+                    title: "Success!",
+                    text: "Thank you for your donation",
+                    icon: "success"
+                  });
+      }
+    })
 
   }
   return (
@@ -51,6 +53,10 @@ const CampaignDetails = () => {
           <span className="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mt-4">
             Campaign-Type : {type}
           </span>
+          <span className="inline-block bg-blue-100 text-black ml-2 px-3 py-1 rounded-full text-sm font-medium mt-4">
+            amount: {detailsCampaign?.amount}
+          </span>
+          
           <div className="mt-6">
             <button onClick={handleDonation} className="w-full btn bg-green-300">Donate Now</button>
           </div>

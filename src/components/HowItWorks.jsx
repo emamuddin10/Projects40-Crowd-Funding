@@ -42,7 +42,7 @@ export default function HowItWorks() {
       <div className="max-w-6xl mx-auto px-4 text-center">
 
       <h1 className="text-2xl font-extrabold" style={{ paddingTop: '5rem', margin: 'auto 0', fontWeight: 'bold' }}>
-        How It Works {" "}
+         It's Works To {" "}
         <span className="text-2xl" style={{ color: 'green', fontWeight: 'bold' }}>
           {/* Style will be inherited from the parent element */}
           <Typewriter

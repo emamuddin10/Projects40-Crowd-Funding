@@ -62,7 +62,7 @@ const AllCampaign = () => {
                 <th>Campaign Info</th>
                 <th>Campaign Type</th>
                 <th>Deadline</th>
-                <th></th>
+                <th>Amount</th>
               </tr>
             </thead>
 

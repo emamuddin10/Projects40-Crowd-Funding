@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
-  const location = useLocation()
-  console.log(location)
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  console.log(location);
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event.target);
@@ -21,19 +24,23 @@ const SignIn = () => {
       .then((result) => {
         console.log(result.user);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        toast.error(err.code || err.message)
       });
   };
   const handleGoogleLogin = () => {
-    googleLogin().then((result) => {
+    googleLogin()
+    .then((result) => {
       console.log(result);
       Swal.fire({
         title: "Google login  Successfully",
         icon: "success",
         draggable: true,
       });
-    });
+    })
+    .catch((err)=>{
+      toast.error(err.code || err.message)
+    })
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -47,14 +54,21 @@ const SignIn = () => {
             <input
               type="email"
               name="email"
-              className="input"
+              className="input w-full"
               placeholder="Email"
             />
             <label className="fieldset-label">Password</label>
+            <span
+              onClick={() => setOpen(!open)}
+              className="relative top-8 left-96 z-50"
+            >
+              {open ? <FaEye></FaEye> : <FaEyeSlash />}
+            </span>
+
             <input
               type="password"
               name="password"
-              className="input"
+              className="input w-full"
               placeholder="Password"
             />
             <div>

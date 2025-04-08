@@ -3,6 +3,8 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 
 
@@ -13,6 +15,7 @@ const SignUp = () => {
   const userInfo = useContext(AuthContext)
   const {createUser,updateUserProfile}= userInfo
   const [error,setError]=useState("")
+  const [open,setOpen] = useState(false)
 
 
   const handleCreateUser = (event)=>{
@@ -23,15 +26,17 @@ const SignUp = () => {
       const email = form.email.value
       const password = form.password.value 
 
-      if(password.length >6){
-        setError('You Should password must be 6 charecter')
-        return
+      console.log(password.length)
+
+      if(password.length < 6){
+        return setError('You Should password must be 6 charecter')
+        
       }
   
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
       if(!regex.test(password)){
-        setError('atleast one uppercase, one lowercase, one special cherecter')
-        return
+        return setError('atleast one uppercase, one lowercase, one special cherecter')
+        
       }
 
       const user ={name,photo,email,password}
@@ -51,10 +56,15 @@ const SignUp = () => {
           navigate('/')
         })
       })
-
-
+      .catch((err)=>{
+        toast.error(err.code || err.message)
+      })
+      
 
   }
+
+  console.log(open)
+
   return (
     <div className=" flex justify-center items-center min-h-screen">
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
@@ -67,8 +77,14 @@ const SignUp = () => {
             <input type="text" name="photo" className="input w-full" placeholder="Enter Your Photo Url" />
             <label className="fieldset-label">Email</label>
             <input type="email" name="email"  className="input w-full" placeholder="Email" />
-            <label className="fieldset-label">Password</label>
-            <input type="password" name="password" className="input w-full" placeholder="Password" />
+            <label className="absolute fieldset-label">Password</label>
+            <span onClick={()=>setOpen(!open)}  className="relative top-8 left-96 z-50">
+             {
+              open ? <FaEye ></FaEye> :  <FaEyeSlash />
+             }
+            
+            </span>
+            <input type={open ? "text" : "password"} name="password" className="input w-full" placeholder="Password" />
             <input className="btn  bg-green-300" type="submit" value="Sign Up" />
             <p className="text-red-500">{error} </p>
             <p>If you have already account please  <Link to="/signIn" className=" font-bold text-green-400">Login</Link></p>

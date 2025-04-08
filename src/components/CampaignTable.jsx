@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const CampaignTable = ({ campaign }) => {
-  const { _id, name, type, photo,date } = campaign;
+  const { _id, name, type, photo,date,amount } = campaign;
 
   return (
     <tr className="overflow-x-auto">
@@ -36,7 +36,8 @@ const CampaignTable = ({ campaign }) => {
            Support our campaign
         </span>
       </td>
-      <td>{campaign?.date ? date : <p>2021-04-04</p>}   Purple</td>
+      <td>{campaign?.date ? date : <p>2021-04-04</p>} </td>
+      <td>${amount} </td>
       <th>
         <Link to={`/campaign-details/${_id}`}>
           <button className="btn btn-success btn-xs">Campaign Details</button>
