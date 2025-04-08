@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRegLightbulb } from "react-icons/fa";
 import { LuPencilLine, LuShare2,LuHandHeart } from "react-icons/lu";
+import { Typewriter } from "react-simple-typewriter";
 
 
 const steps = [
@@ -26,11 +27,37 @@ const steps = [
   },
 ];
 
+
+
 export default function HowItWorks() {
+
+
+  const handleDone = () => {
+    console.log(`Done after 5 loops!`)
+  }
+
   return (
-    <section className="bg-gray-50 py-12">
+    <section className="bg-gray-50 dark:bg-black pb-12">
+     
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800">How It Works</h2>
+
+      <h1 className="text-2xl font-extrabold" style={{ paddingTop: '5rem', margin: 'auto 0', fontWeight: 'bold' }}>
+        How It Works {" "}
+        <span className="text-2xl" style={{ color: 'green', fontWeight: 'bold' }}>
+          {/* Style will be inherited from the parent element */}
+          <Typewriter
+            words={['Create a Campaign', 'Share with Friends', 'Collect Donations','Achieve Your Goal']}
+            loop={3}
+            cursor
+            cursorStyle='_'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={500}
+            onLoopDone={handleDone}
+          />
+        </span>
+      </h1>
+
         <p className="text-gray-600 mb-12 max-w-xl mx-auto">
           Fundraising on our platform is simple and effective. Just follow these four easy steps to reach your goal.
         </p>

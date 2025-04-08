@@ -7,30 +7,38 @@ const CampaignDetails = () => {
   const detailsCampaign = useLoaderData();
   const {user}= useContext(AuthContext)
 
-  // console.log(detailsCampaign);
+  console.log(detailsCampaign);
   const { name, description, type, photo } = detailsCampaign;
 
   const handleDonation = ()=>{
-    const donateCampaign = {...detailsCampaign,userName:user?.displayName, userEmail: user?.email }
+    const donateCampaign = {
+       name: detailsCampaign?.name,
+       type: detailsCampaign?.type,
+       photo: detailsCampaign?.photo,
+       description: detailsCampaign.description,
+       date: detailsCampaign?.date,
+       amount: detailsCampaign?.amount,
+       userName:user?.displayName, userEmail: user?.email }
+       console.log(donateCampaign)
     
-    fetch('http://localhost:5000/add-donation',{
-      method:'POST',
-      headers:{
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(donateCampaign)
-    })
-    .then(res=>res.json())
-    .then(data => {
-      // console.log(data)
-      if(data.insertedId){
-        Swal.fire({
-                    title: "Success!",
-                    text: "Thank you for your donation",
-                    icon: "success"
-                  });
-      }
-    })
+    // fetch('http://localhost:5000/add-donation',{
+    //   method:'POST',
+    //   headers:{
+    //     'content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(donateCampaign)
+    // })
+    // .then(res=>res.json())
+    // .then(data => {
+    //   // console.log(data)
+    //   if(data.insertedId){
+    //     Swal.fire({
+    //                 title: "Success!",
+    //                 text: "Thank you for your donation",
+    //                 icon: "success"
+    //               });
+    //   }
+    // })
 
   }
   return (

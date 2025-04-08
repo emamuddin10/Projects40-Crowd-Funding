@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -12,6 +12,7 @@ const SignUp = () => {
   const navigate = useNavigate()
   const userInfo = useContext(AuthContext)
   const {createUser,updateUserProfile}= userInfo
+  const [error,setError]=useState("")
 
 
   const handleCreateUser = (event)=>{
@@ -21,6 +22,17 @@ const SignUp = () => {
       const photo = form.photo.value 
       const email = form.email.value
       const password = form.password.value 
+
+      if(password.length >6){
+        setError('You Should password must be 6 charecter')
+        return
+      }
+  
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      if(!regex.test(password)){
+        setError('atleast one uppercase, one lowercase, one special cherecter')
+        return
+      }
 
       const user ={name,photo,email,password}
       console.log(user)
@@ -58,6 +70,7 @@ const SignUp = () => {
             <label className="fieldset-label">Password</label>
             <input type="password" name="password" className="input w-full" placeholder="Password" />
             <input className="btn  bg-green-300" type="submit" value="Sign Up" />
+            <p className="text-red-500">{error} </p>
             <p>If you have already account please  <Link to="/signIn" className=" font-bold text-green-400">Login</Link></p>
           </form>
         </div>

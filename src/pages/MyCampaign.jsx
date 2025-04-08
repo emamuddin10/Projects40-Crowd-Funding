@@ -2,18 +2,47 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import CampaignTable from "../components/CampaignTable";
 import MyCampaignTable from "../components/MyCampaignTable/MyCampaignTable";
+import Lotti from "../components/Lotti";
+import Swal from "sweetalert2";
 
 const MyCampaign = () => {
   const { user } = useContext(AuthContext);
   const [myCampaign, setMyCampaign] = useState([]);
+  const [loading,setLoading] = useState(true)
+
   useEffect(() => {
     fetch(`http://localhost:5000/my-campaign/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setMyCampaign(data);
+        setLoading(false)
       });
-  }, []);
+  }, [user]);
+
+  if(loading){
+    return <Lotti></Lotti>
+  }
+
+  const handleDelete = (id)=>{
+    fetch(`http://localhost:5000/delete-campaign/${id}`,{
+      method:'DELETE',
+    })
+    .then(res=>res.json())
+    .then(data =>{
+      console.log(data)
+      const remaining = myCampaign.filter(item=> item._id !== id)
+      setMyCampaign(remaining)
+      if(data.deletedCount > 0){
+        Swal.fire({
+          title: "The Campaign deleted successfully!",
+          icon: "success",
+          draggable: true
+        });
+      }
+    })
+
+  }
 
   return (
     <div className="overflow-x-auto my-5">
@@ -40,7 +69,7 @@ const MyCampaign = () => {
           <tbody>
             {/* row 1 */}
             {myCampaign.map((campaign,inx) => (
-              <MyCampaignTable key={inx} index={inx} campaign={campaign}></MyCampaignTable>
+              <MyCampaignTable key={inx} index={inx} campaign={campaign} handleDelete={handleDelete}></MyCampaignTable>
             ))}
           </tbody>
         </table>

@@ -2,26 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const MyCampaignTable = ({index,campaign}) => {
+const MyCampaignTable = ({index,campaign,handleDelete}) => {
     const { _id, name, type, date } = campaign;
    
-    const handleDelete = (id)=>{
-      fetch(`http://localhost:5000/delete-campaign/${id}`,{
-        method:'DELETE',
-      })
-      .then(res=>res.json())
-      .then(data =>{
-        console.log(data)
-        if(data.deletedCount > 0){
-          Swal.fire({
-            title: "The Campaign deleted successfully!",
-            icon: "success",
-            draggable: true
-          });
-        }
-      })
-
-    }
+   
     return (
         <tr>
         <th>

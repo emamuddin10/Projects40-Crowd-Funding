@@ -1,19 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import CampaignsCard from "../components/CampaignsCard";
+import Lotti from "../components/Lotti";
 
 const MyDonation = () => {
   const { user } = useContext(AuthContext);
   const [donation, setDonation] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch(`http://localhost:5000/myDonation/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
+
         console.log(data);
         setDonation(data);
+        setLoading(false)
       });
   }, [user]);
+
+  if(loading){
+    return <Lotti></Lotti>
+  }
+
   return (
     <div className="p-5 lg:p-10">
       <h1 className="text-2xl font-bold text-center my-5">My Donation</h1>
