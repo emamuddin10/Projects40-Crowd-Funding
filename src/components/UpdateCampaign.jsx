@@ -1,33 +1,34 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../provider/AuthProvider";
 
-const AddCampaign = () => {
-  const {user}=useContext(AuthContext)
-  console.log(user)
- 
+const UpdateCampaign = () => {
+  const loadedData = useLoaderData();
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   const [formData, setFormData] = useState({
-    name: "Winter Clothes Drive",
-    description: "Donate warm clothes to those in need",
-    type: "Personal Issue",
-    photo: "https://i.ibb.co.com/tTF4fV8G/firefighter-hugging-a-child.jpg",
-    userName:user?.displayName,
-    email:user?.email,
-    date:'01.01.2005',
-    amount:5500
-
+    name: loadedData?.name,
+    description: loadedData?.description,
+    type: loadedData?.type,
+    photo: loadedData?.photo,
+    userName: loadedData?.userName,
+    email: loadedData?.email,
+    date: loadedData?.date,
+    amount: 5500,
   });
-  
 
   const handleChange = (event) => {
-    console.log(event.target.name)
+    console.log(event.target.name);
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleAddCampaign = (event) => {
     event.preventDefault();
-    fetch("http://localhost:5000/addCampaign", {
-      method: "POST",
+    console.log(formData);
+    fetch(`http://localhost:5000/update/${loadedData._id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -36,24 +37,25 @@ const AddCampaign = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if(data.insertedId){
+        if (data.modifiedCount > 0) {
           Swal.fire({
-            title: "Added!",
-            text: "Your Campaign have been added.",
-            icon: "success"
+            title: "Updated!",
+            text: "Your Campaign have been updated.",
+            icon: "success",
           });
         }
       });
   };
-  console.log(formData)
 
   return (
-    <div className="w-10/12 mx-auto py-5 lg:py-10">
-      <h1 className="text-green-900 text-center text-3xl font-semibold">Add a Campaign</h1>
+    <div className="w-10/12 mx-auto py-10">
+      <h1 className="text-green-900 text-center text-3xl font-semibold">
+        Update a Campaign
+      </h1>
       <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
         <div className="card-body">
           <form onSubmit={handleAddCampaign} className="fieldset w-full">
-            <div className="lg:flex gap-10">
+            <div className="flex gap-10">
               <div className="w-full space-y-2">
                 <label className="fieldset-label">Name</label>
                 <input
@@ -65,8 +67,14 @@ const AddCampaign = () => {
                   placeholder="Enter Campaign Name"
                 />
                 <label className="fieldset-label">Donation Amount</label>
-                <input type="text" name="amount" value={formData.amount}
-                  onChange={handleChange} className="input w-full" placeholder="Enter Amount" />
+                <input
+                  type="text"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleChange}
+                  className="input w-full"
+                  placeholder="Enter Amount"
+                />
               </div>
               <div className="w-full space-y-2">
                 <label className="fieldset-label">Campaign Description</label>
@@ -138,7 +146,11 @@ const AddCampaign = () => {
               />
             </div>
             <div>
-              <input type="submit" className="btn w-full bg-green-300 mt-4" value="Add Campaign" />
+              <input
+                type="submit"
+                className="btn w-full bg-green-300 mt-4"
+                value="Update Campaign"
+              />
             </div>
           </form>
         </div>
@@ -147,5 +159,4 @@ const AddCampaign = () => {
   );
 };
 
-export default AddCampaign;
- 
+export default UpdateCampaign;

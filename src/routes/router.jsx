@@ -9,6 +9,8 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import CampaignDetails from "../components/CampaignDetails";
 import ErrorPage from "../pages/ErrorPage";
+import UpdateCampaign from "../components/UpdateCampaign";
+import PrivetRoute from "./PrivetRoute";
 
 
 const router = createBrowserRouter([
@@ -29,8 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/allCampaign',
-                element:<AllCampaign></AllCampaign>,
-                loader:()=>fetch('http://localhost:5000/allCampaign')
+                element:<AllCampaign></AllCampaign>
             },
           
             {
@@ -43,8 +44,13 @@ const router = createBrowserRouter([
             },
             {
                 path:'/campaign-details/:id',
-                element:<CampaignDetails></CampaignDetails>,
+                element:<PrivetRoute><CampaignDetails></CampaignDetails></PrivetRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/details-campaign/${params.id}`)
+            },
+            {
+                 path:'/update/:id',
+                 element:<UpdateCampaign></UpdateCampaign>,
+                 loader:({params})=>fetch(`http://localhost:5000/details-campaign/${params.id}`)
             }
         ]
     },
@@ -57,6 +63,7 @@ const router = createBrowserRouter([
         path:'/signUp',
         element:<SignUp></SignUp>
     },
+   
 
 ])
 

@@ -1,19 +1,21 @@
 import React from "react";
 import ActiveCampaign from "../components/ActiveCampaign";
 import Slider from "../components/Slider";
+import HowItWorks from "../components/HowItWorks";
+import CampaignCategories from "../components/CampaignCategories";
+import Reviews from "../components/Reviews";
 
 const Home = () => {
   return (
     <div>
         {/* banner */}
-      <section>
         <Slider></Slider>
-      </section>
+        <HowItWorks></HowItWorks>
 
       {/* campaign section  */}
-      <section>
           <ActiveCampaign></ActiveCampaign>
-      </section>
+          <CampaignCategories></CampaignCategories>
+          <Reviews></Reviews>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
+  const location = useLocation()
+  console.log(location)
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event.target);

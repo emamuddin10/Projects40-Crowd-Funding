@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 const CampaignTable = ({ campaign }) => {
-  const { _id, name, type, photo } = campaign;
+  const { _id, name, type, photo,date } = campaign;
 
   return (
-    <tr>
+    <tr className="overflow-x-auto">
       <th>
         <label>
           <input type="checkbox" className="checkbox" />
@@ -33,10 +33,10 @@ const CampaignTable = ({ campaign }) => {
         {type}
         <br />
         <span className="badge badge-ghost badge-sm">
-          Desktop Support Technician
+           Support our campaign
         </span>
       </td>
-      <td>Purple</td>
+      <td>{campaign?.date ? date : <p>2021-04-04</p>}   Purple</td>
       <th>
         <Link to={`/campaign-details/${_id}`}>
           <button className="btn btn-success btn-xs">Campaign Details</button>

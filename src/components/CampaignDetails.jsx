@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const CampaignDetails = () => {
   const detailsCampaign = useLoaderData();
-  console.log(detailsCampaign);
+  const {user}= useContext(AuthContext)
+
+  // console.log(detailsCampaign);
   const { name, description, type, photo } = detailsCampaign;
+
+  const handleDonation = ()=>{
+    const donateCampaign = {...detailsCampaign,userName:user?.displayName, userEmail: user?.email }
+    
+    fetch('http://localhost:5000/add-donation',{
+      method:'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(donateCampaign)
+    })
+    .then(res=>res.json())
+    .then(data => {
+      // console.log(data)
+      if(data.insertedId){
+        Swal.fire({
+                    title: "Success!",
+                    text: "Thank you for your donation",
+                    icon: "success"
+                  });
+      }
+    })
+
+  }
   return (
     <div className="flex justify-center items-center w-full min-h-fit bg-gray-100 p-4">
       <div className="w-full max-w-full shadow-lg rounded-2xl overflow-hidden bg-white">
@@ -16,7 +44,7 @@ const CampaignDetails = () => {
             Campaign-Type : {type}
           </span>
           <div className="mt-6">
-            <button className="w-full btn bg-green-300">Donate Now</button>
+            <button onClick={handleDonation} className="w-full btn bg-green-300">Donate Now</button>
           </div>
         </div>
       </div>

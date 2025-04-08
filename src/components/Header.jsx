@@ -75,7 +75,7 @@ const Header = () => {
               />
               {/* Hover Effect */}
               <div
-                className={`absolute top-10 right-0  mt-2 w-48 bg-white shadow-lg rounded-lg p-4 transition-opacity duration-300 ${
+                className={`absolute top-6 right-0  mt-2 w-48 bg-white shadow-lg rounded-lg p-4 transition-opacity duration-300 ${
                   hover ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
                 onMouseEnter={() => setHover(true)}
