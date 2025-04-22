@@ -11,7 +11,7 @@ const MyCampaign = () => {
   const [loading,setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`https://projects40-croud-funding-server.vercel.app/my-campaign/${user?.email}`)
+    fetch(`https://projects40-crowd-funding-server.onrender.com/my-campaign/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -25,7 +25,7 @@ const MyCampaign = () => {
   }
 
   const handleDelete = (id)=>{
-    fetch(`https://projects40-croud-funding-server.vercel.app/delete-campaign/${id}`,{
+    fetch(`https://projects40-crowd-funding-server.onrender.com/delete-campaign/${id}`,{
       method:'DELETE',
     })
     .then(res=>res.json())

@@ -26,7 +26,7 @@ const AddCampaign = () => {
 
   const handleAddCampaign = (event) => {
     event.preventDefault();
-    fetch("https://projects40-croud-funding-server.vercel.app/addCampaign", {
+    fetch("https://projects40-crowd-funding-server.onrender.com/addCampaign", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -5,7 +5,7 @@ const ActiveCampaign = () => {
   const [loadedData, setLoadedData] = useState([]);
 
   useEffect(() => {
-    fetch("https://projects40-croud-funding-server.vercel.app/allCampaign")
+    fetch("https://projects40-crowd-funding-server.onrender.com/allCampaign")
       .then((res) => res.json())
       .then((data) => setLoadedData(data));
   }, []);

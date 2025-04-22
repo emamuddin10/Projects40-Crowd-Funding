@@ -10,7 +10,7 @@ const AllCampaign = () => {
   
 
   useEffect(() => {
-    fetch("https://projects40-croud-funding-server.vercel.app/allCampaign")
+    fetch("https://projects40-crowd-funding-server.onrender.com/allCampaign")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

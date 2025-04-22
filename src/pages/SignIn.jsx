@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
@@ -10,6 +10,7 @@ const SignIn = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
   console.log(location);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,11 +24,13 @@ const SignIn = () => {
     loginUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate(location?.state ? location?.state : "/")
       })
       .catch((err) => {
         toast.error(err.code || err.message)
       });
   };
+
   const handleGoogleLogin = () => {
     googleLogin()
     .then((result) => {
@@ -37,6 +40,7 @@ const SignIn = () => {
         icon: "success",
         draggable: true,
       });
+      navigate(location?.state ? location?.state : "/")
     })
     .catch((err)=>{
       toast.error(err.code || err.message)

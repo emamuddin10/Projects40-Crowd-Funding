@@ -16,7 +16,7 @@ const CampaignsCard = ({ campaign }) => {
         <h2 className="card-title">{name}</h2>
 
         {
-        description.length > 90 ?
+        description?.length > 90 ?
         <p>
            {description.slice(0,90)}.... 
         </p>

@@ -45,12 +45,12 @@ const router = createBrowserRouter([
             {
                 path:'/campaign-details/:id',
                 element:<PrivetRoute><CampaignDetails></CampaignDetails></PrivetRoute>,
-                loader:({params})=>fetch(`https://projects40-croud-funding-server.vercel.app/details-campaign/${params.id}`)
+                loader:({params})=>fetch(`https://projects40-crowd-funding-server.onrender.com/details-campaign/${params.id}`)
             },
             {
                  path:'/update/:id',
                  element:<PrivetRoute><UpdateCampaign></UpdateCampaign></PrivetRoute>,
-                 loader:({params})=>fetch(`https://projects40-croud-funding-server.vercel.app/details-campaign/${params.id}`)
+                 loader:({params})=>fetch(`https://projects40-crowd-funding-server.onrender.com/details-campaign/${params.id}`)
             }
         ]
     },

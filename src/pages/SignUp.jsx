@@ -53,7 +53,7 @@ const SignUp = () => {
 
         updateUserProfile(name,photo)
         .then(()=>{
-          navigate('/')
+          navigate(location?.state ? location?.state : "/")
         })
       })
       .catch((err)=>{
